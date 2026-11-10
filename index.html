@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nagaraj Bhat — Automation &amp; Robotics Engineer</title>
+<meta name="description" content="Nagaraj Bhat — Automation & Robotics Engineer. Autonomous UAV systems, GPS-denied navigation, ROS 2 and PX4. AIR 1 SAEINDIA Aerothon 2025."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛩️</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0e14; --bg2:#0f1420; --card:#121826; --card2:#161d2e;
+  --line:#1e2638; --txt:#e6ebf4; --dim:#8b96ab; --faint:#5c6673;
+  --accent:#4da3ff; --accent2:#7aa2ff; --gold:#f5c542; --green:#3ddc97;
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden}
+::selection{background:rgba(77,163,255,.3)}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.nav-logo{font-weight:700;font-size:18px;color:var(--txt)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{color:var(--dim);font-size:14.5px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--txt)}
+.nav-cta{background:var(--accent);color:#0a0e14!important;padding:8px 16px;border-radius:8px;font-weight:600;font-size:13.5px!important}
+.nav-cta:hover{background:var(--accent2)}
+#burger{display:none;background:none;border:none;color:var(--txt);font-size:24px;cursor:pointer}
+
+/* hero */
+header{min-height:100vh;display:flex;align-items:center;position:relative;padding:100px 0 60px;overflow:hidden}
+#grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(77,163,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(77,163,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse 90% 70% at 50% 30%,#000 30%,transparent 75%)}
+.glow{position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(140px);opacity:.16;pointer-events:none}
+.glow.a{background:var(--accent);top:-220px;right:-120px}
+.glow.b{background:#7d5cff;bottom:-260px;left:-160px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--dim);margin-bottom:22px}
+.kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,151,.5)}50%{box-shadow:0 0 0 6px rgba(61,220,151,0)}}
+.hero h1{font-size:clamp(38px,5.6vw,62px);font-weight:700;line-height:1.12;letter-spacing:-.5px}
+.hero h1 .grad{background:linear-gradient(92deg,var(--accent),#9d7cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:18px;color:var(--dim);margin:20px 0 8px;max-width:560px}
+.hero .sub b{color:var(--txt);font-weight:600}
+.medals{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px}
+.medal{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#1a2130,#141a28);border:1px solid #2a3448;border-radius:10px;padding:9px 14px;font-size:13.5px;font-weight:600}
+.medal .badge{font-size:16px}
+.medal small{display:block;font-weight:400;color:var(--dim);font-size:11.5px;line-height:1.2}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:transform .18s,box-shadow .18s,background .18s}
+.btn.primary{background:var(--accent);color:#0a0e14;box-shadow:0 8px 30px rgba(77,163,255,.25)}
+.btn.primary:hover{transform:translateY(-2px);background:var(--accent2)}
+.btn.ghost{border:1px solid var(--line);background:rgba(18,24,38,.6);color:var(--txt)}
+.btn.ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
+.hero-card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.hero-card .face{width:92px;height:92px;border-radius:18px;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:40px;background:radial-gradient(circle at 30% 25%,rgba(77,163,255,.22),transparent 60%);margin-bottom:18px}
+.hstat{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.hstat:last-of-type{border-bottom:none}
+.hstat b{font-size:20px;color:var(--accent)}
+.hstat span{color:var(--dim)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:12px;letter-spacing:2px;animation:bob 2.4s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* sections */
+section{padding:88px 0}
+.sec-head{margin-bottom:44px}
+.sec-tag{color:var(--accent);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;font-family:'JetBrains Mono',monospace}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;margin-top:8px;letter-spacing:-.3px}
+.sec-head p{color:var(--dim);max-width:640px;margin-top:10px}
+
+/* projects */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
+.proj{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
+.proj:hover{transform:translateY(-4px);border-color:rgba(77,163,255,.45)}
+.proj::before{content:'';position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--accent),transparent 70%);opacity:0;transition:opacity .2s}
+.proj:hover::before{opacity:1}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.proj-ico{width:44px;height:44px;border-radius:11px;background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.25);display:flex;align-items:center;justify-content:center;font-size:21px}
+.proj .gh{color:var(--faint);font-size:20px;transition:color .2s}
+.proj:hover .gh{color:var(--txt)}
+.proj h3{font-size:17.5px;margin-bottom:8px;font-weight:600}
+.proj p{color:var(--dim);font-size:14px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:rgba(77,163,255,.09);border:1px solid rgba(77,163,255,.2);padding:3px 9px;border-radius:6px}
+.wide{grid-column:1/-1;display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:center}
+.footnote{margin-top:30px;color:var(--dim);font-size:13.5px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.skill-cat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.skill-cat h4{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:5px 12px;border-radius:7px;background:var(--bg2);border:1px solid var(--line);color:var(--txt)}
+
+/* experience / timeline */
+.xp{border-left:2px solid var(--line);padding-left:28px;max-width:760px}
+.xp-item{position:relative;padding-bottom:34px}
+.xp-item:last-child{padding-bottom:0}
+.xp-item::before{content:'';position:absolute;left:-35px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.xp-item h3{font-size:17px;font-weight:600}
+.xp-item h3 span{color:var(--accent);font-weight:500}
+.xp-meta{color:var(--dim);font-size:13px;margin:3px 0 12px;display:flex;gap:14px;flex-wrap:wrap}
+.xp-item ul{list-style:none;color:var(--dim);font-size:14.5px}
+.xp-item li{padding-left:18px;position:relative;margin-bottom:7px}
+.xp-item li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+.xp-item li b{color:var(--txt);font-weight:600}
+
+/* contact */
+.contact-box{background:linear-gradient(135deg,#10182a,#0d1220);border:1px solid var(--line);border-radius:20px;padding:56px 40px;text-align:center}
+.contact-box h2{margin-top:0}
+.contact-box p{color:var(--dim);max-width:520px;margin:14px auto 30px}
+.socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.soc{display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-weight:500;font-size:14.5px;transition:border-color .2s,transform .18s}
+.soc:hover{border-color:var(--accent);transform:translateY(-2px)}
+
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--faint);font-size:13px;text-align:center}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px}
+  .hero-card{order:-1;max-width:420px}
+  .nav-links{position:fixed;top:62px;right:0;flex-direction:column;background:var(--bg2);border-left:1px solid var(--line);border-top:1px solid var(--line);width:230px;padding:22px;display:none}
+  .nav-links.open{display:flex}
+  #burger{display:block}
+  .wide{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="nav-logo" href="#top">nagaraj<span>.dev</span></a>
+    <button id="burger" aria-label="menu">☰</button>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="Resume.pdf" download>Résumé ↓</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div id="grid-bg"></div><div class="glow a"></div><div class="glow b"></div>
+  <div class="wrap hero">
+    <div>
+      <span class="kicker"><span class="dot"></span> Automation &amp; Robotics Engineer @ aeroKLE · UAV Systems</span>
+      <h1>Building drones that<br><span class="grad">think for themselves.</span></h1>
+      <p class="sub">Autonomous UAV systems from <b>perception to flight-tested control</b> — GPS-denied navigation with OpenVINS, ROS 2 + PX4 integration, and agentic RL pipelines that train in simulation before flying real hardware.</p>
+      <div class="medals">
+        <div class="medal"><span class="badge">🏆</span><span>AIR 1<small>SAEINDIA Aerothon 2025</small></span></div>
+        <div class="medal"><span class="badge">🥈</span><span>AIR 2<small>SAEISS ADDC 2026</small></span></div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn primary" href="#projects">View My Work →</a>
+        <a class="btn ghost" href="https://github.com/Nags016" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="face">🛩️</div>
+      <div class="hstat"><span>Specialty</span><b>UAV Autonomy</b></div>
+      <div class="hstat"><span>Stack</span><b>ROS 2 · PX4</b></div>
+      <div class="hstat"><span>Current R&amp;D</span><b>OpenVINS VIO</b></div>
+      <div class="hstat"><span>Competitions</span><b>2× All-India Podium</b></div>
+      <div class="hstat"><span>Open Source</span><b>Guides + Drivers</b></div>
+    </div>
+  </div>
+  <div class="scroll-hint">▾ SCROLL</div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">// Selected Work</div>
+      <h2>Projects that fly, map, and optimize</h2>
+      <p>A mix of flight-proven autonomy systems, competition engineering, and open-source guides.</p>
+    </div>
+    <div class="proj-grid">
+
+      <article class="proj wide reveal">
+        <div>
+          <div class="proj-top"><div class="proj-ico">🤖</div><a class="gh" href="https://github.com/Nags016/aeroforge" target="_blank" rel="noopener">↗</a></div>
+          <h3>AeroForge — The Agentic Flight Engineer</h3>
+          <p>A multi-agent system that turns <b>natural-language drone missions</b> into validated flight policies: a Mission Analyst parses intent, an Autonomy Architect picks the strategy (MPC / RRT* / PPO / SAC), an Experiment Engineer trains in PX4 SITL + Gazebo, a Verification Agent enforces safety thresholds, and a Crash Analyzer auto-diagnoses .ulg logs and retries. Built for the Google All Things Agentic Hackathon 2026 (Taskmaster category).</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">PPO / SAC</span><span class="tag">PX4 SITL</span><span class="tag">Gazebo</span><span class="tag">ROS 2</span><span class="tag">GCP</span></div>
+        </div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><div class="proj-ico">🧭</div><a class="gh" href="https://github.com/Nags016/PX4-Autopilot" target="_blank" rel="noopener">↗</a></div>
+        <h3>GPS-Denied UAV Navigation (OpenVINS)</h3>
+        <p>Visual-inertial odometry fused into PX4 via ROS 2 + MAVLink on a Raspberry Pi 5 — stable flight without GPS. Upstreamed a Benewake TF02-Pro UART driver (100 Hz ranging) for rangefinder altitude hold.</p>
+        <div class="tags"><span class="tag">OpenVINS</span><span class="tag">ROS 2</span><span class="tag">PX4</span><span class="tag">Sensor Fusion</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><div class="proj-ico">📖</div><a class="gh" href="https://github.com/Nags016/PX4-ROS2-Gazebo-setup-guide" target="_blank" rel="noopener">↗</a></div>
+        <h3>PX4 + ROS 2 + Gazebo Setup Guide <span style="color:var(--gold)">★4</span></h3>
+        <p>The setup guide I wish existed: a clean Distrobox-based workflow for the full PX4 sim stack — zero confusing steps, community-tested.</p>
+        <div class="tags"><span class="tag">Distrobox</span><span class="tag">Gazebo</span><span class="tag">QGC</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><div class="proj-ico">🤝</div><span class="gh">🔒</span></div>
+        <h3>UAV–UGV Cooperative Autonomy</h3>
+        <p>Multi-vehicle PX4 control with LiDAR point-cloud mapping and thermal-camera integration for search-and-rescue — aerial and ground robots coordinating through ROS 2.</p>
+        <div class="tags"><span class="tag">Multi-Robot</span><span class="tag">LiDAR</span><span class="tag">Thermal</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><div class="proj-ico">⚡</div><span class="gh">🔒</span></div>
+        <h3>FOC-Based BLDC Torque Optimization</h3>
+        <p>Field-oriented control with Clarke/Park transforms and SVPWM in Simulink, with an embedded implementation strategy for STM32.</p>
+        <div class="tags"><span class="tag">Simulink</span><span class="tag">STM32</span><span class="tag">Motor Control</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><div class="proj-ico">🏭</div><span class="gh">🔒</span></div>
+        <h3>ML-Driven Industrial Robot Optimization</h3>
+        <p>RAPID code parser + RobotStudio RWS API pipeline that extracts motion trajectories, generates optimized paths, and cuts industrial robot cycle time.</p>
+        <div class="tags"><span class="tag">RobotStudio</span><span class="tag">Python</span><span class="tag">RWS API</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><div class="proj-ico">🎯</div><a class="gh" href="https://github.com/Nags016/kalibr-calibration-setup" target="_blank" rel="noopener">↗</a></div>
+        <h3>Kalibr Camera Calibration Setup</h3>
+        <p>Docker + ROS 1 workflow for camera-IMU calibration with Kalibr — reproducible out of the box.</p>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">ROS 1</span><span class="tag">Calibration</span></div>
+      </article>
+
+    </div>
+    <p class="footnote reveal">More on my GitHub: <a href="https://github.com/Nags016/imu-allan-variance-calibration">IMU Allan-variance calibration</a> · <a href="https://github.com/Nags016/jetson-agx-xavier-setup">Jetson AGX Xavier setup (Arch L4T)</a> · <a href="https://github.com/Nags016/codex-luna-routing">codex-luna-routing</a></p>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">// Toolbox</div>
+      <h2>What I build with</h2>
+    </div>
+    <div class="skills reveal">
+      <div class="skill-cat">
+        <h4>Autonomy &amp; Robotics</h4>
+        <div class="chips"><span class="chip">ROS 2</span><span class="chip">PX4 Autopilot</span><span class="chip">MAVLink</span><span class="chip">Gazebo</span><span class="chip">AirSim</span><span class="chip">OpenVINS (VIO)</span><span class="chip">Nav2</span><span class="chip">Sensor Fusion</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Embedded &amp; Compute</h4>
+        <div class="chips"><span class="chip">STM32</span><span class="chip">Raspberry Pi 5</span><span class="chip">Jetson AGX</span><span class="chip">Pixhawk</span><span class="chip">OAK-D</span><span class="chip">RTOS concepts</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Programming</h4>
+        <div class="chips"><span class="chip">Python</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">MATLAB</span><span class="chip">Bash</span><span class="chip">Git</span><span class="chip">Docker</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Modeling &amp; Simulation</h4>
+        <div class="chips"><span class="chip">Simulink</span><span class="chip">ROS Toolbox</span><span class="chip">Simscape</span><span class="chip">Model-Based Design</span><span class="chip">RobotStudio</span><span class="chip">SolidWorks</span><span class="chip">ANSYS (basic FEA)</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>AI for Autonomy</h4>
+        <div class="chips"><span class="chip">PPO / SAC (SB3)</span><span class="chip">Reinforcement Learning</span><span class="chip">Computer Vision</span><span class="chip">VLM / LLM tooling</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Systems</h4>
+        <div class="chips"><span class="chip">Linux (Ubuntu / Arch / Garuda)</span><span class="chip">Shell scripting</span><span class="chip">PCB Design (EasyEDA)</span><span class="chip">QGroundControl</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">// Journey</div>
+      <h2>Experience &amp; education</h2>
+    </div>
+    <div class="xp reveal">
+      <div class="xp-item">
+        <h3>Automation &amp; Robotics Engineer <span>@ aeroKLE, Hubballi</span></h3>
+        <div class="xp-meta"><span>Dec 2024 — Present</span></div>
+        <ul>
+          <li><b>All India Rank 1 — SAEINDIA Aerothon 2025:</b> designed &amp; integrated a fully autonomous UAV with robust avionics and real-time processing.</li>
+          <li><b>All India Rank 2 — SAEISS ADDC 2026:</b> engineered a servo-driven 3-finger payload mechanism for precise, damage-free egg grasp-and-drop.</li>
+          <li>Lead end-to-end integration: flight controller, companion computer, sensors &amp; power systems.</li>
+          <li>Built perception-to-control pipelines improving responsiveness and stability of autonomous ops.</li>
+        </ul>
+      </div>
+      <div class="xp-item">
+        <h3>B.E. Automation &amp; Robotics <span>@ KLE Technological University, Hubballi</span></h3>
+        <div class="xp-meta"><span>Expected Aug 2027</span><span>CGPA 8.5</span></div>
+      </div>
+      <div class="xp-item">
+        <h3>Certifications <span>@ MathWorks</span></h3>
+        <div class="xp-meta"><span>MATLAB Onramp · Simulink Onramp · Control System Toolbox · Simscape Onramp</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="sec-tag">// Contact</div>
+      <h2>Let's build autonomous systems together</h2>
+      <p>Open to internships, research collaborations, and open-source work in UAV autonomy, robotics, and embedded systems.</p>
+      <div class="socials">
+        <a class="soc" href="mailto:nagarajsbhat12@gmail.com">✉ nagarajsbhat12@gmail.com</a>
+        <a class="soc" href="https://www.linkedin.com/in/nagaraj-bhat-2690b929b/" target="_blank" rel="noopener">in / LinkedIn</a>
+        <a class="soc" href="https://github.com/Nags016" target="_blank" rel="noopener">⌥ / GitHub</a>
+        <a class="soc" href="https://www.instagram.com/nagarajbhat_/" target="_blank" rel="noopener">Instagram</a>
+        <a class="soc" href="https://www.reddit.com/user/NagarajBhat016/" target="_blank" rel="noopener">Reddit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Nagaraj Bhat · Built with vanilla HTML/CSS — no frameworks harmed</div>
+</footer>
+
+<script>
+document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}})},{threshold:.12}).observe(el)});
+document.getElementById('burger').onclick=()=>document.querySelector('.nav-links').classList.toggle('open');
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
+</script>
+</body>
+</html>
