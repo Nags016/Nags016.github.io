@@ -3,339 +3,482 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nagaraj Bhat — Automation &amp; Robotics Engineer</title>
-<meta name="description" content="Nagaraj Bhat — Automation & Robotics Engineer. Autonomous UAV systems, GPS-denied navigation, ROS 2 and PX4. AIR 1 SAEINDIA Aerothon 2025."/>
+<title>Nagaraj Bhat — UAV Autonomy Engineer</title>
+<meta name="description" content="Nagaraj Bhat — Automation & Robotics Engineer. Autonomous UAV systems, GPS-denied navigation with OpenVINS, ROS 2 + PX4. AIR 1 SAEINDIA Aerothon 2025."/>
+<meta name="theme-color" content="#050505"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛩️</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0a0e14; --bg2:#0f1420; --card:#121826; --card2:#161d2e;
-  --line:#1e2638; --txt:#e6ebf4; --dim:#8b96ab; --faint:#5c6673;
-  --accent:#4da3ff; --accent2:#7aa2ff; --gold:#f5c542; --green:#3ddc97;
-  --radius:14px;
+  --bg:#050505; --panel:#0a0d12; --panel2:#0d1117; --line:#1b2129; --line2:#232b36;
+  --txt:#e8edf4; --dim:#94a0b4; --faint:#5b6675;
+  --cy:#67e8f9; --gr:#3ddc97; --am:#ffc857; --bl:#4da3ff;
+  --mono:'JetBrains Mono',monospace; --sans:'Inter',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden}
-::selection{background:rgba(77,163,255,.3)}
-.mono{font-family:'JetBrains Mono',monospace}
-a{color:var(--accent);text-decoration:none}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.65;overflow-x:hidden}
+::selection{background:rgba(103,232,249,.25)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#222a35;border-radius:6px}
+a{color:var(--cy);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 26px}
+.mono{font-family:var(--mono)}
 
-/* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-.nav-logo{font-weight:700;font-size:18px;color:var(--txt)}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:26px;align-items:center}
-.nav-links a{color:var(--dim);font-size:14.5px;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--txt)}
-.nav-cta{background:var(--accent);color:#0a0e14!important;padding:8px 16px;border-radius:8px;font-weight:600;font-size:13.5px!important}
-.nav-cta:hover{background:var(--accent2)}
-#burger{display:none;background:none;border:none;color:var(--txt);font-size:24px;cursor:pointer}
+/* ============ BOOT LOADER ============ */
+#boot{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .5s,visibility .5s}
+#boot.done{opacity:0;visibility:hidden}
+.boot-inner{text-align:center;width:min(340px,80vw)}
+.boot-mark{font-family:var(--mono);font-size:44px;color:var(--cy);letter-spacing:6px;margin-bottom:22px;animation:flick 1.6s infinite}
+@keyframes flick{0%,100%{opacity:1}92%{opacity:1}95%{opacity:.4}97%{opacity:1}}
+#boot-line{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:2px;margin-bottom:14px;white-space:nowrap}
+.boot-bar{height:3px;background:#141a22;border-radius:2px;overflow:hidden}
+#boot-fill{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bl),var(--cy));transition:width .25s}
+#boot.done .boot-inner{transform:scale(.98)}
 
-/* hero */
-header{min-height:100vh;display:flex;align-items:center;position:relative;padding:100px 0 60px;overflow:hidden}
-#grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(77,163,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(77,163,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse 90% 70% at 50% 30%,#000 30%,transparent 75%)}
-.glow{position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(140px);opacity:.16;pointer-events:none}
-.glow.a{background:var(--accent);top:-220px;right:-120px}
-.glow.b{background:#7d5cff;bottom:-260px;left:-160px}
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative}
-.kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--dim);margin-bottom:22px}
-.kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,151,.5)}50%{box-shadow:0 0 0 6px rgba(61,220,151,0)}}
-.hero h1{font-size:clamp(38px,5.6vw,62px);font-weight:700;line-height:1.12;letter-spacing:-.5px}
-.hero h1 .grad{background:linear-gradient(92deg,var(--accent),#9d7cff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .sub{font-size:18px;color:var(--dim);margin:20px 0 8px;max-width:560px}
-.hero .sub b{color:var(--txt);font-weight:600}
-.medals{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px}
-.medal{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#1a2130,#141a28);border:1px solid #2a3448;border-radius:10px;padding:9px 14px;font-size:13.5px;font-weight:600}
-.medal .badge{font-size:16px}
-.medal small{display:block;font-weight:400;color:var(--dim);font-size:11.5px;line-height:1.2}
-.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:transform .18s,box-shadow .18s,background .18s}
-.btn.primary{background:var(--accent);color:#0a0e14;box-shadow:0 8px 30px rgba(77,163,255,.25)}
-.btn.primary:hover{transform:translateY(-2px);background:var(--accent2)}
-.btn.ghost{border:1px solid var(--line);background:rgba(18,24,38,.6);color:var(--txt)}
-.btn.ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
-.hero-card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-.hero-card .face{width:92px;height:92px;border-radius:18px;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:40px;background:radial-gradient(circle at 30% 25%,rgba(77,163,255,.22),transparent 60%);margin-bottom:18px}
-.hstat{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
-.hstat:last-of-type{border-bottom:none}
-.hstat b{font-size:20px;color:var(--accent)}
-.hstat span{color:var(--dim)}
-.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:12px;letter-spacing:2px;animation:bob 2.4s infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+/* ============ CURSOR ============ */
+#cur{position:fixed;z-index:999;pointer-events:none;transition:opacity .3s}
+#cur .c-dot{position:absolute;width:6px;height:6px;background:var(--cy);border-radius:50%;transform:translate(-50%,-50%)}
+#cur .c-r{position:absolute;width:30px;height:30px;border:1px solid rgba(103,232,249,.35);border-radius:50%;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
+#cur.hot .c-r{width:48px;height:48px;border-color:rgba(61,220,151,.6)}
+#cur.hide{opacity:0}
+@media (pointer:coarse){#cur{display:none}}
 
-/* sections */
-section{padding:88px 0}
-.sec-head{margin-bottom:44px}
-.sec-tag{color:var(--accent);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;font-family:'JetBrains Mono',monospace}
-h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;margin-top:8px;letter-spacing:-.3px}
-.sec-head p{color:var(--dim);max-width:640px;margin-top:10px}
+/* ============ NAV ============ */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--bl),var(--cy));z-index:200;width:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:150;background:rgba(5,5,5,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:transform .3s}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--mono);font-weight:600;font-size:16px;color:var(--txt);letter-spacing:1px}
+.logo i{color:var(--cy);font-style:normal}
+.logo .blink{animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.nav-r{display:flex;gap:26px;align-items:center}
+.nav-r a{font-size:13.5px;color:var(--dim);font-weight:500;letter-spacing:.4px}
+.nav-r a:hover{color:var(--txt)}
+.nav-cta{font-family:var(--mono);font-size:12.5px!important;border:1px solid var(--line2);padding:8px 16px;border-radius:7px;color:var(--cy)!important;letter-spacing:1px}
+.nav-cta:hover{border-color:var(--cy)}
+#burger{display:none;background:none;border:none;color:var(--txt);font-size:22px;cursor:pointer}
+#mobile-menu{display:none;position:fixed;top:64px;right:0;background:var(--panel);border-bottom:1px solid var(--line);border-left:1px solid var(--line);padding:18px 26px;z-index:150;flex-direction:column;gap:16px}
+#mobile-menu.open{display:flex}
+#mobile-menu a{color:var(--dim);font-size:15px}
+
+/* ============ HERO ============ */
+header{min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden;padding:110px 0 40px}
+#gridfx{position:absolute;inset:0;z-index:0}
+#scan{position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px);pointer-events:none}
+.glow{position:absolute;border-radius:50%;filter:blur(150px);opacity:.14;pointer-events:none;z-index:0}
+.glow.g1{background:var(--bl);width:560px;height:560px;top:-180px;right:-100px}
+.glow.g2{background:#6d5cff;width:460px;height:460px;bottom:-220px;left:-120px}
+.hero{position:relative;z-index:2;display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;letter-spacing:1.6px;color:var(--dim);border:1px solid var(--line2);background:rgba(10,13,18,.7);border-radius:99px;padding:7px 15px;margin-bottom:26px;animation:fadeUp .7s .1s both}
+.status b{width:7px;height:7px;background:var(--gr);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,151,.55)}55%{box-shadow:0 0 0 7px rgba(61,220,151,0)}}
+h1.hero-title{font-size:clamp(36px,5.4vw,58px);font-weight:800;line-height:1.1;letter-spacing:-.8px;animation:fadeUp .7s .2s both}
+h1.hero-title .accent{color:var(--cy)}
+.hero-sub{color:var(--dim);font-size:16.5px;max-width:560px;margin:20px 0 4px;animation:fadeUp .7s .3s both}
+.hero-sub b{color:var(--txt);font-weight:600}
+.hero-sub .hl{color:var(--am);font-weight:600}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:13px;margin-top:26px;animation:fadeUp .7s .4s both}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;font-weight:500;letter-spacing:.8px;padding:13px 22px;border-radius:9px;transition:transform .18s,box-shadow .18s,border-color .18s}
+.btn-fill{background:var(--cy);color:#04121a;box-shadow:0 0 30px rgba(103,232,249,.22)}
+.btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(103,232,249,.4)}
+.btn-line{border:1px solid var(--line2);color:var(--txt);background:rgba(10,13,18,.5)}
+.btn-line:hover{border-color:var(--cy);transform:translateY(-2px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* HUD telemetry card */
+.hud{position:relative;border:1px solid var(--line2);border-radius:14px;background:linear-gradient(180deg,rgba(13,17,23,.92),rgba(10,13,18,.88));padding:22px;animation:fadeUp .7s .5s both;overflow:hidden}
+.hud::before,.hud::after,.hud .hc::before,.hud .hc::after{content:'';position:absolute;width:14px;height:14px;border-color:var(--cy);opacity:.75}
+.hud::before{top:-1px;left:-1px;border-top:2px solid;border-left:2px solid}
+.hud::after{top:-1px;right:-1px;border-top:2px solid;border-right:2px solid}
+.hud .hc::before{bottom:-1px;left:-1px;border-bottom:2px solid;border-left:2px solid}
+.hud .hc::after{bottom:-1px;right:-1px;border-bottom:2px solid;border-right:2px solid}
+.hud-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--faint);border-bottom:1px dashed var(--line2);padding-bottom:10px;margin-bottom:6px}
+.hud-head b{color:var(--gr);animation:blink 2s infinite}
+.trow{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12.5px;padding:9px 0;border-bottom:1px dashed var(--line);color:var(--dim)}
+.trow:last-of-type{border:none}
+.trow .k{letter-spacing:1px;font-size:11px}
+.trow .v{color:var(--txt);font-weight:600;font-variant-numeric:tabular-nums}
+.trow .v.g{color:var(--gr)}.trow .v.c{color:var(--cy)}.trow .v.a{color:var(--am)}
+.drone-zone{position:relative;height:96px;margin-top:8px;border:1px dashed var(--line2);border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 60%,rgba(103,232,249,.05),transparent 70%)}
+.drone{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);animation:fly 6s ease-in-out infinite}
+@keyframes fly{0%,100%{transform:translate(-50%,-52%) rotate(-2deg)}30%{transform:translate(-42%,-58%) rotate(2deg)}60%{transform:translate(-58%,-46%) rotate(-2deg)}}
+.prop{transform-origin:center;animation:spin .18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.drone-body{filter:drop-shadow(0 10px 14px rgba(61,220,151,.14))}
+.airpath{position:absolute;top:50%;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(103,232,249,.28),transparent)}
+
+/* scroll cue */
+.scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--faint);z-index:2;animation:cue 2.2s infinite}
+@keyframes cue{0%,100%{transform:translate(-50%,0);opacity:.5}50%{transform:translate(-50%,8px);opacity:1}}
+
+/* ============ SECTIONS ============ */
+section{padding:96px 0;position:relative}
+section+.section-alt,.section-alt{background:linear-gradient(180deg,var(--panel),var(--bg))}
+.sec-head{margin-bottom:48px}
+.sec-tag{font-family:var(--mono);font-size:11px;letter-spacing:3.5px;color:var(--cy)}
+.sec-tag::before{content:'// '}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin-top:10px;letter-spacing:-.4px}
+.sec-head p{color:var(--dim);margin-top:10px;max-width:640px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* counters */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.stat{border:1px solid var(--line2);border-radius:12px;background:var(--panel);padding:22px;text-align:center;position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;inset:auto 0 0 0;height:2px;background:linear-gradient(90deg,transparent,var(--cy),transparent);opacity:0;transition:opacity .3s}
+.stat:hover::after{opacity:1}
+.stat b{display:block;font-size:34px;font-weight:800;font-family:var(--mono);color:var(--cy);font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--dim);letter-spacing:.6px}
 
 /* projects */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
-.proj{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
-.proj:hover{transform:translateY(-4px);border-color:rgba(77,163,255,.45)}
-.proj::before{content:'';position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--accent),transparent 70%);opacity:0;transition:opacity .2s}
-.proj:hover::before{opacity:1}
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-.proj-ico{width:44px;height:44px;border-radius:11px;background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.25);display:flex;align-items:center;justify-content:center;font-size:21px}
-.proj .gh{color:var(--faint);font-size:20px;transition:color .2s}
-.proj:hover .gh{color:var(--txt)}
-.proj h3{font-size:17.5px;margin-bottom:8px;font-weight:600}
-.proj p{color:var(--dim);font-size:14px;flex:1}
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{border:1px solid var(--line2);border-radius:13px;background:linear-gradient(180deg,var(--panel2),var(--panel));padding:26px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform .22s,border-color .22s,box-shadow .22s}
+.card.wide{grid-column:1/-1}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--cy),transparent 65%);opacity:0;transition:opacity .25s}
+.card:hover{transform:translateY(-5px);border-color:#2e3946;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.card:hover::before{opacity:1}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.pico{width:44px;height:44px;border-radius:11px;background:rgba(103,232,249,.07);border:1px solid rgba(103,232,249,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.gh-link{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:1.5px;border:1px solid var(--line2);padding:5px 10px;border-radius:6px;transition:.2s}
+.gh-link:hover{color:var(--cy);border-color:var(--cy)}
+.card h3{font-size:17px;font-weight:700;margin-bottom:9px}
+.card p{color:var(--dim);font-size:14px;flex:1}
+.card p b{color:var(--txt);font-weight:600}
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:rgba(77,163,255,.09);border:1px solid rgba(77,163,255,.2);padding:3px 9px;border-radius:6px}
-.wide{grid-column:1/-1;display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:center}
-.footnote{margin-top:30px;color:var(--dim);font-size:13.5px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;color:var(--cy);background:rgba(103,232,249,.06);border:1px solid rgba(103,232,249,.16);padding:4px 10px;border-radius:6px}
+.star{color:var(--am)}
+.more-repos{margin-top:26px;font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:.4px}
+.more-repos a{color:var(--txt);border-bottom:1px dotted var(--faint)}
+.more-repos a:hover{color:var(--cy)}
 
 /* skills */
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-.skill-cat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-.skill-cat h4{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.skill-cat{border:1px solid var(--line2);border-radius:12px;background:var(--panel);padding:22px}
+.skill-cat h4{font-family:var(--mono);font-size:11.5px;letter-spacing:2.5px;color:var(--cy);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.skill-cat h4::after{content:'';flex:1;height:1px;background:var(--line)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-size:13px;padding:5px 12px;border-radius:7px;background:var(--bg2);border:1px solid var(--line);color:var(--txt)}
+.chip{font-size:13px;padding:6px 13px;border-radius:7px;background:var(--panel2);border:1px solid var(--line2);color:var(--txt);transition:.18s}
+.chip:hover{border-color:var(--cy);color:var(--cy);transform:translateY(-1px)}
 
-/* experience / timeline */
-.xp{border-left:2px solid var(--line);padding-left:28px;max-width:760px}
-.xp-item{position:relative;padding-bottom:34px}
+/* timeline */
+.xp{max-width:800px;border-left:2px solid var(--line2);padding-left:30px}
+.xp-item{position:relative;padding-bottom:40px}
 .xp-item:last-child{padding-bottom:0}
-.xp-item::before{content:'';position:absolute;left:-35px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
-.xp-item h3{font-size:17px;font-weight:600}
-.xp-item h3 span{color:var(--accent);font-weight:500}
-.xp-meta{color:var(--dim);font-size:13px;margin:3px 0 12px;display:flex;gap:14px;flex-wrap:wrap}
+.xp-item::before{content:'';position:absolute;left:-39px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--cy);box-shadow:0 0 12px rgba(103,232,249,.35)}
+.xp-item h3{font-size:17px;font-weight:700}
+.xp-item h3 em{color:var(--cy);font-style:normal;font-weight:600}
+.xp-meta{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--faint);margin:5px 0 13px}
+.xp-meta .win{color:var(--am)}
 .xp-item ul{list-style:none;color:var(--dim);font-size:14.5px}
-.xp-item li{padding-left:18px;position:relative;margin-bottom:7px}
-.xp-item li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+.xp-item li{padding-left:20px;position:relative;margin-bottom:8px}
+.xp-item li::before{content:'▹';position:absolute;left:0;color:var(--cy)}
 .xp-item li b{color:var(--txt);font-weight:600}
 
 /* contact */
-.contact-box{background:linear-gradient(135deg,#10182a,#0d1220);border:1px solid var(--line);border-radius:20px;padding:56px 40px;text-align:center}
-.contact-box h2{margin-top:0}
-.contact-box p{color:var(--dim);max-width:520px;margin:14px auto 30px}
-.socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.soc{display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-weight:500;font-size:14.5px;transition:border-color .2s,transform .18s}
-.soc:hover{border-color:var(--accent);transform:translateY(-2px)}
+.contact-box{border:1px solid var(--line2);border-radius:16px;padding:56px 34px;text-align:center;background:radial-gradient(ellipse 70% 90% at 50% 0%,rgba(103,232,249,.06),transparent),var(--panel);position:relative;overflow:hidden}
+.contact-box h2{font-size:clamp(24px,3vw,32px)}
+.contact-box p{color:var(--dim);max-width:560px;margin:14px auto 32px}
+.socials{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.soc{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.5px;padding:11px 19px;border-radius:9px;border:1px solid var(--line2);background:var(--panel2);color:var(--txt);transition:.2s}
+.soc:hover{border-color:var(--cy);color:var(--cy);transform:translateY(-2px)}
+.avail{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gr);border:1px dashed rgba(61,220,151,.4);border-radius:99px;padding:7px 16px;margin-bottom:20px}
+.avail b{width:7px;height:7px;background:var(--gr);border-radius:50%;animation:pulse 2s infinite}
 
-footer{border-top:1px solid var(--line);padding:26px 0;color:var(--faint);font-size:13px;text-align:center}
+footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:1px}
 
-/* reveal */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:none}
-
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;gap:36px}
-  .hero-card{order:-1;max-width:420px}
-  .nav-links{position:fixed;top:62px;right:0;flex-direction:column;background:var(--bg2);border-left:1px solid var(--line);border-top:1px solid var(--line);width:230px;padding:22px;display:none}
-  .nav-links.open{display:flex}
-  #burger{display:block}
-  .wide{grid-template-columns:1fr}
+@media(max-width:920px){
+  .hero{grid-template-columns:1fr;gap:34px}
+  .hud{max-width:460px}
+  .proj{grid-template-columns:1fr}
+  .nav-r{display:none}#burger{display:block}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
 <body>
 
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-mark">NMRJ</div>
+    <p id="boot-line">MOUNTING MISSION ... <span id="boot-pct">0%</span></p>
+    <div class="boot-bar"><span id="boot-fill"></span></div>
+  </div>
+</div>
+
+<div id="cur" class="hide"><span class="c-dot"></span><i class="c-r"></i></div>
+<div id="progress"></div>
+
 <nav>
   <div class="wrap">
-    <a class="nav-logo" href="#top">nagaraj<span>.dev</span></a>
-    <button id="burger" aria-label="menu">☰</button>
-    <div class="nav-links">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
+    <a class="logo" href="#top">nagaraj<i>.bhat</i><span class="blink">_</span></a>
+    <div class="nav-r">
+      <a href="#work">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#log">Mission Log</a>
       <a href="#contact">Contact</a>
-      <a class="nav-cta" href="Resume.pdf" download>Résumé ↓</a>
+      <a class="nav-cta" href="Resume.pdf" download>[ RÉSUMÉ.PDF ↓ ]</a>
     </div>
+    <button id="burger" aria-label="menu">☰</button>
   </div>
 </nav>
+<div id="mobile-menu">
+  <a href="#work">Projects</a><a href="#stack">Stack</a><a href="#log">Mission Log</a>
+  <a href="#contact">Contact</a><a href="Resume.pdf" download>Resume ↓</a>
+</div>
 
 <header id="top">
-  <div id="grid-bg"></div><div class="glow a"></div><div class="glow b"></div>
+  <canvas id="gridfx"></canvas>
+  <div id="scan"></div>
+  <div class="glow g1"></div><div class="glow g2"></div>
   <div class="wrap hero">
     <div>
-      <span class="kicker"><span class="dot"></span> Automation &amp; Robotics Engineer @ aeroKLE · UAV Systems</span>
-      <h1>Building drones that<br><span class="grad">think for themselves.</span></h1>
-      <p class="sub">Autonomous UAV systems from <b>perception to flight-tested control</b> — GPS-denied navigation with OpenVINS, ROS 2 + PX4 integration, and agentic RL pipelines that train in simulation before flying real hardware.</p>
-      <div class="medals">
-        <div class="medal"><span class="badge">🏆</span><span>AIR 1<small>SAEINDIA Aerothon 2025</small></span></div>
-        <div class="medal"><span class="badge">🥈</span><span>AIR 2<small>SAEISS ADDC 2026</small></span></div>
-      </div>
-      <div class="hero-cta">
-        <a class="btn primary" href="#projects">View My Work →</a>
-        <a class="btn ghost" href="https://github.com/Nags016" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn ghost" href="#contact">Get in touch</a>
+      <div class="status"><b></b>AUTONOMY ONLINE · <span class="mono">aeroKLE · KLE TECH</span></div>
+      <h1 class="hero-title">Building drones<br>that <span class="accent">think in flight.</span></h1>
+      <p class="hero-sub">Autonomous UAV systems end-to-end — <b>OpenVINS GPS-denied navigation</b>, <b>ROS 2 + PX4</b> integration, and <span class="hl">agentic RL pipelines</span> that train in simulation before flying real hardware.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-fill" href="#work">VIEW PROJECTS →</a>
+        <a class="btn btn-line" href="https://github.com/Nags016" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a class="btn btn-line" href="#contact">CONTACT</a>
       </div>
     </div>
-    <div class="hero-card">
-      <div class="face">🛩️</div>
-      <div class="hstat"><span>Specialty</span><b>UAV Autonomy</b></div>
-      <div class="hstat"><span>Stack</span><b>ROS 2 · PX4</b></div>
-      <div class="hstat"><span>Current R&amp;D</span><b>OpenVINS VIO</b></div>
-      <div class="hstat"><span>Competitions</span><b>2× All-India Podium</b></div>
-      <div class="hstat"><span>Open Source</span><b>Guides + Drivers</b></div>
+    <div class="hud">
+      <span class="hc"></span>
+      <div class="hud-head"><span>LIVE://FLIGHT-DATA</span><b>◉ REC</b></div>
+      <div class="trow"><span class="k">MODE</span><span class="v c">OFFBOARD / VIO</span></div>
+      <div class="trow"><span class="k">STATE EST</span><span class="v">OpenVINS @ 200Hz</span></div>
+      <div class="trow"><span class="k">FC</span><span class="v">PX4 · MAVLink</span></div>
+      <div class="trow"><span class="k">COMPANION</span><span class="v">Raspberry Pi 5</span></div>
+      <div class="trow"><span class="k">ALT HOLD</span><span class="v a">TF02-Pro @ 100Hz</span></div>
+      <div class="trow"><span class="k">EKF HEALTH</span><span class="v g">NOMINAL</span></div>
+      <div class="airpath"></div>
+      <div class="drone-zone">
+        <svg class="drone drone-body" width="150" height="54" viewBox="0 0 150 54" fill="none">
+          <line x1="20" y1="20" x2="130" y2="20" stroke="#223041" stroke-width="3"/>
+          <line x1="75" y1="8" x2="75" y2="34" stroke="#223041" stroke-width="3"/>
+          <rect x="55" y="24" width="40" height="14" rx="7" fill="#111a26" stroke="#67e8f9" stroke-width="1.4"/>
+          <circle cx="63" cy="31" r="3.4" fill="#67e8f9" opacity=".85"/>
+          <circle cx="87" cy="31" r="3.4" fill="#3ddc97" opacity=".85"/>
+          <g transform="translate(20,1)"><ellipse class="prop" rx="15" ry="2.6" cx="15" cy="19" fill="rgba(103,232,249,.75)"/></g>
+          <g transform="translate(75,1)"><ellipse class="prop" rx="15" ry="2.6" cx="15" cy="19" fill="rgba(103,232,249,.75)" style="animation-delay:.05s"/></g>
+          <g transform="translate(10,31)"><ellipse class="prop" rx="15" ry="2.6" cx="15" cy="9" fill="rgba(103,232,249,.75)" style="animation-delay:.09s"/></g>
+          <g transform="translate(65,31)"><ellipse class="prop" rx="15" ry="2.6" cx="15" cy="9" fill="rgba(103,232,249,.75)" style="animation-delay:.02s"/></g>
+          <path d="M20 20 Q75 2 130 20" stroke="#2e3946" stroke-width="2"/>
+          <circle cx="20" cy="20" r="2.6" fill="#223041"/><circle cx="130" cy="20" r="2.6" fill="#223041"/>
+        </svg>
+      </div>
     </div>
   </div>
-  <div class="scroll-hint">▾ SCROLL</div>
+  <div class="scrollcue">▾ SCROLL</div>
 </header>
 
-<section id="projects">
+<section id="impact" style="padding-top:40px">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">// Selected Work</div>
-      <h2>Projects that fly, map, and optimize</h2>
-      <p>A mix of flight-proven autonomy systems, competition engineering, and open-source guides.</p>
+    <div class="sec-head reveal"><div class="sec-tag">Mission Summary</div><h2>Numbers speak in telemetry too</h2></div>
+    <div class="stats reveal d1">
+      <div class="stat"><b data-count="1" data-pre="AIR-">#</b><span>All-India Rank · Aerothon 2025</span></div>
+      <div class="stat"><b data-count="2" data-pre="AIR-">#</b><span>All-India Rank · ADDC 2026</span></div>
+      <div class="stat"><b data-count="200" data-post="Hz">#</b><span>VIO state-estimation rate</span></div>
+      <div class="stat"><b data-count="9" data-post="+">#</b><span>Open-source repos, guides &amp; drivers</span></div>
     </div>
-    <div class="proj-grid">
+  </div>
+</section>
 
-      <article class="proj wide reveal">
-        <div>
-          <div class="proj-top"><div class="proj-ico">🤖</div><a class="gh" href="https://github.com/Nags016/aeroforge" target="_blank" rel="noopener">↗</a></div>
-          <h3>AeroForge — The Agentic Flight Engineer</h3>
-          <p>A multi-agent system that turns <b>natural-language drone missions</b> into validated flight policies: a Mission Analyst parses intent, an Autonomy Architect picks the strategy (MPC / RRT* / PPO / SAC), an Experiment Engineer trains in PX4 SITL + Gazebo, a Verification Agent enforces safety thresholds, and a Crash Analyzer auto-diagnoses .ulg logs and retries. Built for the Google All Things Agentic Hackathon 2026 (Taskmaster category).</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">PPO / SAC</span><span class="tag">PX4 SITL</span><span class="tag">Gazebo</span><span class="tag">ROS 2</span><span class="tag">GCP</span></div>
-        </div>
+<section id="work" class="section-alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="sec-tag">Mission Showcase</div><h2>Systems I've engineered</h2><p>Flight-proven autonomy, competition hardware, and open-source tooling — full archive on <a href="https://github.com/Nags016" target="_blank" rel="noopener">GitHub ↗</a></p></div>
+    <div class="proj">
+      <article class="card wide reveal"><div class="card-top"><div class="pico">🤖</div><a class="gh-link" href="https://github.com/Nags016/aeroforge" target="_blank" rel="noopener">SOURCE ↗</a></div>
+        <h3>AeroForge — The Agentic Flight Engineer</h3>
+        <p>Natural-language drone mission in, <b>validated flight policy out</b>. A multi-agent pipeline: Mission Analyst → Autonomy Architect (strategy selection: <b>MPC / RRT* / PPO / SAC</b>) → Experiment Engineer (PX4 SITL + Gazebo training) → Verification Agent (safety thresholds) → Crash Analyzer (auto-diagnoses .ulg logs, retries). Built for the <b>Google All Things Agentic Hackathon 2026</b>.</p>
+        <div class="tags"><span class="tag">PYTHON</span><span class="tag">PPO / SAC</span><span class="tag">PX4 SITL</span><span class="tag">GAZEBO</span><span class="tag">ROS 2</span><span class="tag">GCP</span></div>
       </article>
-
-      <article class="proj reveal">
-        <div class="proj-top"><div class="proj-ico">🧭</div><a class="gh" href="https://github.com/Nags016/PX4-Autopilot" target="_blank" rel="noopener">↗</a></div>
-        <h3>GPS-Denied UAV Navigation (OpenVINS)</h3>
-        <p>Visual-inertial odometry fused into PX4 via ROS 2 + MAVLink on a Raspberry Pi 5 — stable flight without GPS. Upstreamed a Benewake TF02-Pro UART driver (100 Hz ranging) for rangefinder altitude hold.</p>
-        <div class="tags"><span class="tag">OpenVINS</span><span class="tag">ROS 2</span><span class="tag">PX4</span><span class="tag">Sensor Fusion</span></div>
+      <article class="card reveal d1"><div class="card-top"><div class="pico">🧭</div><a class="gh-link" href="https://github.com/Nags016/PX4-Autopilot" target="_blank" rel="noopener">SOURCE ↗</a></div>
+        <h3>GPS-Denied UAV Navigation</h3>
+        <p><b>OpenVINS</b> visual-inertial odometry fused into PX4 via ROS 2 + MAVLink on a <b>Raspberry Pi 5</b> — flying without GPS. Also shipped a <b>Benewake TF02-Pro UART driver</b> (100 Hz ranging) for rangefinder altitude hold.</p>
+        <div class="tags"><span class="tag">OPENVINS</span><span class="tag">PX4</span><span class="tag">MAVLINK</span><span class="tag">SENSOR FUSION</span></div>
       </article>
-
-      <article class="proj reveal">
-        <div class="proj-top"><div class="proj-ico">📖</div><a class="gh" href="https://github.com/Nags016/PX4-ROS2-Gazebo-setup-guide" target="_blank" rel="noopener">↗</a></div>
-        <h3>PX4 + ROS 2 + Gazebo Setup Guide <span style="color:var(--gold)">★4</span></h3>
-        <p>The setup guide I wish existed: a clean Distrobox-based workflow for the full PX4 sim stack — zero confusing steps, community-tested.</p>
-        <div class="tags"><span class="tag">Distrobox</span><span class="tag">Gazebo</span><span class="tag">QGC</span></div>
+      <article class="card reveal d2"><div class="card-top"><div class="pico">📖</div><a class="gh-link" href="https://github.com/Nags016/PX4-ROS2-Gazebo-setup-guide" target="_blank" rel="noopener">SOURCE ↗</a></div>
+        <h3>PX4 + ROS 2 + Gazebo Guide <span class="star">★4</span></h3>
+        <p>The setup guide I wish existed: clean <b>Distrobox</b>-based workflow for the full PX4 sim stack — community-tested, zero confusing steps.</p>
+        <div class="tags"><span class="tag">DISTROBOX</span><span class="tag">GAZEBO</span><span class="tag">QGROUNDCTRL</span></div>
       </article>
-
-      <article class="proj reveal">
-        <div class="proj-top"><div class="proj-ico">🤝</div><span class="gh">🔒</span></div>
+      <article class="card reveal d1"><div class="card-top"><div class="pico">🤝</div><span class="gh-link">COMPETITION</span></div>
         <h3>UAV–UGV Cooperative Autonomy</h3>
-        <p>Multi-vehicle PX4 control with LiDAR point-cloud mapping and thermal-camera integration for search-and-rescue — aerial and ground robots coordinating through ROS 2.</p>
-        <div class="tags"><span class="tag">Multi-Robot</span><span class="tag">LiDAR</span><span class="tag">Thermal</span></div>
+        <p>Multi-vehicle PX4 control with <b>LiDAR point-cloud mapping</b> and thermal-camera integration for search-and-rescue — aerial + ground robots coordinating over ROS 2.</p>
+        <div class="tags"><span class="tag">MULTI-ROBOT</span><span class="tag">LIDAR</span><span class="tag">THERMAL</span></div>
       </article>
-
-      <article class="proj reveal">
-        <div class="proj-top"><div class="proj-ico">⚡</div><span class="gh">🔒</span></div>
-        <h3>FOC-Based BLDC Torque Optimization</h3>
-        <p>Field-oriented control with Clarke/Park transforms and SVPWM in Simulink, with an embedded implementation strategy for STM32.</p>
-        <div class="tags"><span class="tag">Simulink</span><span class="tag">STM32</span><span class="tag">Motor Control</span></div>
+      <article class="card reveal d2"><div class="card-top"><div class="pico">⚡</div><span class="gh-link">EMBEDDED</span></div>
+        <h3>FOC BLDC Torque Optimization</h3>
+        <p>Field-oriented control with <b>Clarke / Park transforms + SVPWM</b> modeled in Simulink, with a realtime embedded implementation strategy for <b>STM32</b>.</p>
+        <div class="tags"><span class="tag">SIMULINK</span><span class="tag">STM32</span><span class="tag">SVPWM</span></div>
       </article>
-
-      <article class="proj reveal">
-        <div class="proj-top"><div class="proj-ico">🏭</div><span class="gh">🔒</span></div>
-        <h3>ML-Driven Industrial Robot Optimization</h3>
-        <p>RAPID code parser + RobotStudio RWS API pipeline that extracts motion trajectories, generates optimized paths, and cuts industrial robot cycle time.</p>
-        <div class="tags"><span class="tag">RobotStudio</span><span class="tag">Python</span><span class="tag">RWS API</span></div>
+      <article class="card reveal d1"><div class="card-top"><div class="pico">🏭</div><span class="gh-link">INDUSTRIAL</span></div>
+        <h3>ML Robot Cycle-Time Optimizer</h3>
+        <p><b>RAPID parser</b> extracting ABB motion trajectories → ML path optimization → applied back via <b>RobotStudio RWS API</b> to cut cycle time on real industrial arms.</p>
+        <div class="tags"><span class="tag">ROBOTSTUDIO</span><span class="tag">RAPID</span><span class="tag">ML</span></div>
       </article>
-
-      <article class="proj reveal">
-        <div class="proj-top"><div class="proj-ico">🎯</div><a class="gh" href="https://github.com/Nags016/kalibr-calibration-setup" target="_blank" rel="noopener">↗</a></div>
-        <h3>Kalibr Camera Calibration Setup</h3>
-        <p>Docker + ROS 1 workflow for camera-IMU calibration with Kalibr — reproducible out of the box.</p>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">ROS 1</span><span class="tag">Calibration</span></div>
+      <article class="card reveal d2"><div class="card-top"><div class="pico">🎯</div><a class="gh-link" href="https://github.com/Nags016/kalibr-calibration-setup" target="_blank" rel="noopener">SOURCE ↗</a></div>
+        <h3>Kalibr Camera–IMU Calibration</h3>
+        <p>Docker + ROS 1 workflow for reproducible <b>camera–IMU calibration</b> — the boring setup steps, reliably packaged.</p>
+        <div class="tags"><span class="tag">DOCKER</span><span class="tag">ROS 1</span><span class="tag">KALIBR</span></div>
       </article>
-
+      <article class="card reveal d3"><div class="card-top"><div class="pico">🛠️</div><a class="gh-link" href="https://github.com/Nags016/jetson-agx-xavier-setup" target="_blank" rel="noopener">SOURCE ↗</a></div>
+        <h3>Jetson AGX Xavier — Arch Linux Guide</h3>
+        <p>Complete patch-flash-boot pipeline for <b>L4T R35.5.0 on Arch Linux</b> — from empty board to CUDA-ready flight computer.</p>
+        <div class="tags"><span class="tag">JETSON</span><span class="tag">L4T</span><span class="tag">ARCH</span></div>
+      </article>
     </div>
-    <p class="footnote reveal">More on my GitHub: <a href="https://github.com/Nags016/imu-allan-variance-calibration">IMU Allan-variance calibration</a> · <a href="https://github.com/Nags016/jetson-agx-xavier-setup">Jetson AGX Xavier setup (Arch L4T)</a> · <a href="https://github.com/Nags016/codex-luna-routing">codex-luna-routing</a></p>
+    <p class="more-repos reveal">Also on GitHub → <a href="https://github.com/Nags016/imu-allan-variance-calibration" target="_blank" rel="noopener">imu-allan-variance-calibration</a> · <a href="https://github.com/Nags016/codex-luna-routing" target="_blank" rel="noopener">codex-luna-routing</a> · <a href="https://github.com/Nags016/n8n-Local-Setup" target="_blank" rel="noopener">n8n-Local-Setup</a></p>
   </div>
 </section>
 
-<section id="skills" style="background:var(--bg2)">
+<section id="stack" class="section-alt">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">// Toolbox</div>
-      <h2>What I build with</h2>
-    </div>
-    <div class="skills reveal">
-      <div class="skill-cat">
-        <h4>Autonomy &amp; Robotics</h4>
-        <div class="chips"><span class="chip">ROS 2</span><span class="chip">PX4 Autopilot</span><span class="chip">MAVLink</span><span class="chip">Gazebo</span><span class="chip">AirSim</span><span class="chip">OpenVINS (VIO)</span><span class="chip">Nav2</span><span class="chip">Sensor Fusion</span></div>
-      </div>
-      <div class="skill-cat">
-        <h4>Embedded &amp; Compute</h4>
-        <div class="chips"><span class="chip">STM32</span><span class="chip">Raspberry Pi 5</span><span class="chip">Jetson AGX</span><span class="chip">Pixhawk</span><span class="chip">OAK-D</span><span class="chip">RTOS concepts</span></div>
-      </div>
-      <div class="skill-cat">
-        <h4>Programming</h4>
-        <div class="chips"><span class="chip">Python</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">MATLAB</span><span class="chip">Bash</span><span class="chip">Git</span><span class="chip">Docker</span></div>
-      </div>
-      <div class="skill-cat">
-        <h4>Modeling &amp; Simulation</h4>
-        <div class="chips"><span class="chip">Simulink</span><span class="chip">ROS Toolbox</span><span class="chip">Simscape</span><span class="chip">Model-Based Design</span><span class="chip">RobotStudio</span><span class="chip">SolidWorks</span><span class="chip">ANSYS (basic FEA)</span></div>
-      </div>
-      <div class="skill-cat">
-        <h4>AI for Autonomy</h4>
-        <div class="chips"><span class="chip">PPO / SAC (SB3)</span><span class="chip">Reinforcement Learning</span><span class="chip">Computer Vision</span><span class="chip">VLM / LLM tooling</span></div>
-      </div>
-      <div class="skill-cat">
-        <h4>Systems</h4>
-        <div class="chips"><span class="chip">Linux (Ubuntu / Arch / Garuda)</span><span class="chip">Shell scripting</span><span class="chip">PCB Design (EasyEDA)</span><span class="chip">QGroundControl</span></div>
-      </div>
+    <div class="sec-head reveal"><div class="sec-tag">Payload Manifest</div><h2>Full stack, flight to factory</h2></div>
+    <div class="skill-grid">
+      <div class="skill-cat reveal"><h4>AUTONOMY &amp; ROBOTICS</h4><div class="chips"><span class="chip">ROS 2</span><span class="chip">PX4 Autopilot</span><span class="chip">MAVLink</span><span class="chip">Gazebo</span><span class="chip">AirSim</span><span class="chip">OpenVINS (VIO)</span><span class="chip">Nav2</span><span class="chip">Sensor Fusion</span></div></div>
+      <div class="skill-cat reveal d1"><h4>MODEL-BASED DESIGN</h4><div class="chips"><span class="chip">Simulink</span><span class="chip">MATLAB</span><span class="chip">ROS Toolbox</span><span class="chip">Control System Toolbox</span><span class="chip">Simscape</span><span class="chip">System Validation</span></div></div>
+      <div class="skill-cat reveal d2"><h4>EMBEDDED &amp; COMPUTE</h4><div class="chips"><span class="chip">STM32</span><span class="chip">Raspberry Pi 5</span><span class="chip">Jetson AGX/Xavier</span><span class="chip">Pixhawk 6X</span><span class="chip">OAK-D</span><span class="chip">RTOS concepts</span></div></div>
+      <div class="skill-cat reveal d3"><h4>PROGRAMMING</h4><div class="chips"><span class="chip">Python</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">MATLAB</span><span class="chip">Bash</span><span class="chip">Git / GitHub</span></div></div>
+      <div class="skill-cat reveal d1"><h4>AI FOR AUTONOMY</h4><div class="chips"><span class="chip">PPO / SAC (SB3)</span><span class="chip">Reinforcement Learning</span><span class="chip">Computer Vision</span><span class="chip">LLM tooling</span><span class="chip">Sensor Fusion</span></div></div>
+      <div class="skill-cat reveal d2"><h4>MECHANICAL &amp; DESIGN</h4><div class="chips"><span class="chip">SolidWorks</span><span class="chip">EasyEDA (PCB)</span><span class="chip">ANSYS (basic FEA)</span><span class="chip">Payload engineering</span></div></div>
+      <div class="skill-cat reveal d3"><h4>SYSTEMS &amp; OPS</h4><div class="chips"><span class="chip">Ubuntu</span><span class="chip">Arch / Garuda</span><span class="chip">Jetson Linux</span><span class="chip">Shell scripting</span><span class="chip">Docker</span><span class="chip">Distrobox</span></div></div>
+      <div class="skill-cat reveal d4"><h4>FLIGHT OPS &amp; TEST</h4><div class="chips"><span class="chip">QGroundControl</span><span class="chip">SITL / HITL</span><span class="chip">MAVLink routing</span><span class="chip">ULog analysis</span><span class="chip">Real-flight validation</span></div></div>
     </div>
   </div>
 </section>
 
-<section id="experience">
+<section id="log" class="section-alt">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">// Journey</div>
-      <h2>Experience &amp; education</h2>
-    </div>
-    <div class="xp reveal">
-      <div class="xp-item">
-        <h3>Automation &amp; Robotics Engineer <span>@ aeroKLE, Hubballi</span></h3>
-        <div class="xp-meta"><span>Dec 2024 — Present</span></div>
+    <div class="sec-head reveal"><div class="sec-tag">Mission Log</div><h2>Experience &amp; education</h2></div>
+    <div class="xp">
+      <div class="xp-item reveal"><h3>Automation &amp; Robotics Engineer <em>@ aeroKLE — Hubballi</em></h3>
+        <div class="xp-meta"><span class="win">🏆 DEC 2024 — PRESENT</span></div>
         <ul>
-          <li><b>All India Rank 1 — SAEINDIA Aerothon 2025:</b> designed &amp; integrated a fully autonomous UAV with robust avionics and real-time processing.</li>
+          <li><b>All India Rank 1 — SAEINDIA Aerothon 2025:</b> designed and integrated a fully autonomous UAV — avionics, real-time processing, end-to-end mission flow.</li>
           <li><b>All India Rank 2 — SAEISS ADDC 2026:</b> engineered a servo-driven 3-finger payload mechanism for precise, damage-free egg grasp-and-drop.</li>
-          <li>Lead end-to-end integration: flight controller, companion computer, sensors &amp; power systems.</li>
-          <li>Built perception-to-control pipelines improving responsiveness and stability of autonomous ops.</li>
-        </ul>
+          <li>Lead integration: flight controller, companion computer, sensors &amp; power systems with reliable inter-subsystem comms.</li>
+          <li>Built perception-to-control pipelines improving responsiveness and stability of autonomous operations.</li>
+        </ul></div>
+      <div class="xp-item reveal d1"><h3>GPS-Denied Navigation — Flight-Test Program <em>@ aeroKLE R&amp;D</em></h3>
+        <div class="xp-meta"><span class="win">2025 — ONGOING</span></div>
+        <ul><li>Real-world flight testing of the OpenVINS + PX4 navigation stack; iterating on reliability and accuracy under real conditions.</li></ul></div>
+      <div class="xp-item reveal d2"><h3>B.E. Automation &amp; Robotics <em>@ KLE Technological University, Hubballi</em></h3>
+        <div class="xp-meta"><span>EXPECTED AUG 2027</span><span>CGPA 8.5</span></div>
       </div>
-      <div class="xp-item">
-        <h3>B.E. Automation &amp; Robotics <span>@ KLE Technological University, Hubballi</span></h3>
-        <div class="xp-meta"><span>Expected Aug 2027</span><span>CGPA 8.5</span></div>
-      </div>
-      <div class="xp-item">
-        <h3>Certifications <span>@ MathWorks</span></h3>
-        <div class="xp-meta"><span>MATLAB Onramp · Simulink Onramp · Control System Toolbox · Simscape Onramp</span></div>
+      <div class="xp-item reveal d3"><h3>Certifications <em>@ MathWorks</em></h3>
+        <div class="xp-meta"><span>MATLAB ONRAMP · SIMULINK ONRAMP · CONTROL SYSTEM TOOLBOX · SIMSCAPE ONRAMP</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact" style="background:var(--bg2)">
+<section id="contact" class="section-alt">
   <div class="wrap">
     <div class="contact-box reveal">
-      <div class="sec-tag">// Contact</div>
-      <h2>Let's build autonomous systems together</h2>
-      <p>Open to internships, research collaborations, and open-source work in UAV autonomy, robotics, and embedded systems.</p>
+      <div class="avail"><b></b>OPEN TO INTERNSHIPS · RESEARCH · COLLABS</div>
+      <h2>Ground control to Nagaraj</h2>
+      <p>Looking for UAV autonomy, robotic embedded systems, or simulation-first robotics work? Let's talk.</p>
       <div class="socials">
-        <a class="soc" href="mailto:nagarajsbhat12@gmail.com">✉ nagarajsbhat12@gmail.com</a>
-        <a class="soc" href="https://www.linkedin.com/in/nagaraj-bhat-2690b929b/" target="_blank" rel="noopener">in / LinkedIn</a>
-        <a class="soc" href="https://github.com/Nags016" target="_blank" rel="noopener">⌥ / GitHub</a>
-        <a class="soc" href="https://www.instagram.com/nagarajbhat_/" target="_blank" rel="noopener">Instagram</a>
-        <a class="soc" href="https://www.reddit.com/user/NagarajBhat016/" target="_blank" rel="noopener">Reddit</a>
+        <a class="soc" href="mailto:nagarajsbhat12@gmail.com">EMAIL →</a>
+        <a class="soc" href="https://www.linkedin.com/in/nagaraj-bhat-2690b929b/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        <a class="soc" href="https://github.com/Nags016" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a class="soc" href="Resume.pdf" download>RÉSUMÉ ↓</a>
+        <a class="soc" href="https://www.instagram.com/nagarajbhat_/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+        <a class="soc" href="https://www.reddit.com/user/NagarajBhat016/" target="_blank" rel="noopener">REDDIT ↗</a>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">© 2026 Nagaraj Bhat · Built with vanilla HTML/CSS — no frameworks harmed</div>
-</footer>
+<footer><div class="wrap">NAGS⚔FLIGHT · © 2026 NAGARAJ BHAT · BUILT WITHOUT FRAMEWORKS — JUST AUTONOMY</div></footer>
 
 <script>
-document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}})},{threshold:.12}).observe(el)});
-document.getElementById('burger').onclick=()=>document.querySelector('.nav-links').classList.toggle('open');
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
+/* boot */
+(function(){
+  const lcd=['MOUNTING MISSION','CALIBRATING IMU','FUSING VIO','ARMING PX4','AUTONOMY ONLINE'];
+  const fill=document.getElementById('boot-fill'),line=document.getElementById('boot-line'),pct=document.getElementById('boot-pct');
+  let p=0,i=0;const t=setInterval(()=>{p=Math.min(100,p+Math.random()*18+6);
+    fill.style.width=p+'%';pct.textContent=Math.round(p)+'%';
+    const li=Math.min(lcd.length-1,Math.floor(p/25));if(li!==i){i=li;}
+    line.textContent=lcd[i]+' ... '+pct.textContent;
+    if(p>=100){clearInterval(t);setTimeout(()=>{document.getElementById('boot').classList.add('done')},420)}},170);
+})();
+
+/* cursor */
+(function(){
+  const c=document.getElementById('cur');
+  window.addEventListener('mousemove',e=>{
+    c.classList.remove('hide');
+    c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';
+    const hot=e.target.closest('a,button,.card,.chip');
+    c.classList.toggle('hot',!!hot);
+  },{passive:true});
+})();
+
+/* grid canvas */
+(function(){
+  const cv=document.getElementById('gridfx'),ctx=cv.getContext('2d');
+  let w,h,pts=[],mx=0,my=0;
+  const resize=()=>{w=cv.width=innerWidth;h=cv.height=Math.max(document.querySelector('header').offsetHeight,innerHeight);
+    pts=Array.from({length:60},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}));};
+  resize();addEventListener('resize',resize,{passive:true});
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY},{passive:true});
+  const draw=()=>{
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='rgba(103,232,249,.045)';ctx.lineWidth=1;
+    for(let x=0;x<w;x+=46){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
+    for(let y=0;y<h;y+=46){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+    for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;}
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=dx*dx+dy*dy;
+        if(d<19000){ctx.strokeStyle='rgba(103,232,249,'+(0.09*(1-d/19000))+')';
+          ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}
+      }
+      const dx=pts[i].x-mx,dy=pts[i].y-my,d2=dx*dx+dy*dy;
+      if(d2<29000){ctx.fillStyle='rgba(61,220,151,.6)';ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.6,0,7);ctx.fill();
+        if(d2<16000){ctx.strokeStyle='rgba(61,220,151,'+(0.12*(1-d2/16000))+')';ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(mx,my);ctx.stroke()}
+      }else{ctx.fillStyle='rgba(103,232,249,.5)';ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.3,0,7);ctx.fill()}
+    }
+    requestAnimationFrame(draw);
+  };
+  document.fonts&&document.fonts.ready.then(draw);draw();
+})();
+
+/* reveals + counters */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const cio=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;const b=e.target;cio.unobserve(b);
+    const pre=b.dataset.pre||'',post=b.dataset.post||'',end=+b.dataset.count;
+    let cur=0;const step=Math.max(1,Math.round(end/48));
+    const t=setInterval(()=>{cur+=step;if(cur>=end){cur=end;clearInterval(t)}
+      b.textContent=pre+cur+post},26);
+  }),{threshold:.5});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+})();
+
+/* progress + mobile menu */
+(function(){
+  const bar=document.getElementById('progress');
+  addEventListener('scroll',()=>{const s=document.documentElement;
+    bar.style.width=(s.scrollTop/(s.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+  const m=document.getElementById('mobile-menu');
+  document.getElementById('burger').onclick=()=>m.classList.toggle('open');
+  m.querySelectorAll('a').forEach(a=>a.onclick=()=>m.classList.remove('open'));
+})();
 </script>
 </body>
 </html>
